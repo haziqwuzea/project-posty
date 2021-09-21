@@ -45,12 +45,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
     public function posts() //buat kat sini sbb 1 user has many post
     {
         return $this->hasMany(Post::class);
     }
 
+
     public function likes() {
         return $this->hasMany(Like::class);
+    }
+
+
+    public function receivedLikes()
+    {
+        return $this->hasManyThrough(Like::class, Post::class);
     }
 }
